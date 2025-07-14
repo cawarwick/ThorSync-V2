@@ -1,10 +1,11 @@
 # ThorSync-V2
 Opens and converts ThorSync to csv and does other simple data extraction
 
-I recommend for a typical experiment each script gets run in order of 
-1 TSOutput_All.py
-2 TS_Force_FrameOut.py
-3 find_peaks_frames_v2.py
+I recommend for a typical experiment each script gets run in order of:
+
+1. TSOutput_All.py
+2. TS_Force_FrameOut.py
+3. find_peaks_frames_v2.py
 
 so that what happens is
 1. You get all the channels into 1 CSV
@@ -17,19 +18,22 @@ I don't have a good method for stitching everything together as of 7/14/25.
 TSOutput_All will convert HDFs Thorsync files to CSVS.
 The TS scripts will intake the .H5 files from ThorSync and downsample them to the desired rate, then filter them by whichever datafiles you want to keep, and then saving them either to a single CSV per .h5 file. 
 
-Put all your TS files into one folder 
+Put all your TS files into one folder:
+
 ![image](https://github.com/cawarwick/ThorSync-Processor/assets/81972652/616452b0-2339-4836-90d1-73c130223c1d)
 
 and provide the path in the script:
+
 <img width="676" height="66" alt="image" src="https://github.com/user-attachments/assets/481852eb-9591-45fa-be85-9c6e6c81bce1" />
 
 Make sure you've selected all the channels you want to keep and specified the target frame rate ('target_fs'). 100hz is fine for basic syncing, 1000hz is better for estim and mechstim, 5-10khz is minimum for frame alingment between 1p and 2p imaging. 
+
 <img width="474" height="259" alt="image" src="https://github.com/user-attachments/assets/f2a6ba94-ccb2-41b3-9d9d-cf1b6e2b0275" />
 
 And when run, it will generate 1 CSV per H5 file at the specified frame rate. 
 
 # TS_Force_FrameOut.py 
-uses a directory of H5s just like above except that it will only grab the Force and the Frames columns and put them into a single CSV per recording. This makes analyzing the force data faster rather than opening every column of the CSV.
+uses a directory of H5s just like above except that it will only grab the Force and the Frames columns and put them into a single CSV per recording and it will convert the CI/frame_counter from frames into volumes, so you need to make sure you have the right number of frames per volume here. This makes analyzing the force data faster rather than opening every column of the CSV.
 
 I recommend leaving the frame rate at 1000hz and only changing the directory path:
 <img width="666" height="59" alt="image" src="https://github.com/user-attachments/assets/cbfc534b-374b-41b1-abf5-ce3088a66eee" />
